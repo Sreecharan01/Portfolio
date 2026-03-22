@@ -42,6 +42,14 @@ export const portfolioData = {
 
     projects: [
         {
+            title: "Portfolio",
+            description: "This is my official Portfolio.",
+            techStack: ["React.js", "Node.js", "GSAP"],
+            liveLink: "https://portfolio-01-ecru.vercel.app/",
+            githubLink: "https://github.com/Sreecharan01/Portfolio-01",
+            image: ""
+        },
+        {
             title: "Bug Tracker",
             description: "A dynamic web application used to track and report bugs by the Users and Developers.",
             techStack: ["React", "NodeJS", "MongoDB"],
@@ -65,14 +73,7 @@ export const portfolioData = {
             githubLink: "https://github.com/Sreecharan01/Toys-Zone",
             image: ""
         },
-        {
-            title: "Portfolio",
-            description: "This is my official Portfolio.",
-            techStack: ["React.js", "Node.js", "GSAP"],
-            liveLink: "https://portfolio-01-ecru.vercel.app/",
-            githubLink: "https://github.com/Sreecharan01/Portfolio-01",
-            image: ""
-        },
+
         {
             title: "Soil Pollution",
             description: "A website that shows all the type of Soil Pollution in the World.",
