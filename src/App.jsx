@@ -44,12 +44,20 @@ const CustomCursor = () => {
   );
 };
 
+
 const TopNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
   const linksRef = useRef([]);
+  const isInitial = useRef(true);
 
   useGSAP(() => {
+    if (isInitial.current) {
+      gsap.set(menuRef.current, { top: "-100%" });
+      isInitial.current = false;
+      return;
+    }
+
     if (isOpen) {
       gsap.to(menuRef.current, { top: 0, duration: 0.8, ease: "power4.inOut" });
       gsap.fromTo(linksRef.current,
@@ -63,18 +71,20 @@ const TopNav = () => {
 
   const navLinks = [
     { name: "About", href: "#bio" },
+    { name: "Projects", href: "#projects" },
+    { name: "Certifications", href: "#certifications" },
     { name: "Education", href: "#expertise" },
     { name: "Skills", href: "#expertise" },
     { name: "Achievements", href: "#achievements" },
-    { name: "Certifications", href: "#certifications" },
-    { name: "Projects", href: "#projects" },
+
+
   ];
 
   return (
     <>
-      <nav className="sticky top-0 z-[100] flex justify-between items-center px-8 md:px-16 pt-6 pb-4 bg-transparent">
+      <nav className="sticky top-0 z-[100] flex justify-between items-center px-8 md:px-16 pt-6 pb-4 bg-[#f3f3f3]/90 backdrop-blur-md border-b border-gray-200/50 rounded-t-[2rem] md:rounded-t-[3rem]">
         {/* Logo / Name */}
-        <div className="font-black tracking-widest text-xl md:text-2xl uppercase text-black">
+        <div className="font-black tracking-widest text-xl md:text-2xl uppercase text-black cursor-none">
           {portfolioData.personalInfo.name}
         </div>
 
@@ -99,7 +109,11 @@ const TopNav = () => {
       </nav>
 
       {/* Full Screen Overlay Menu */}
-      <div ref={menuRef} className="fixed top-[-100%] left-0 w-full h-full bg-[#111] z-[90] flex items-center justify-center rounded-b-[3rem] shadow-2xl">
+      <div
+        ref={menuRef}
+        style={{ top: '-100%' }}
+        className="fixed left-0 w-full h-full bg-[#111] z-[90] flex items-center justify-center rounded-b-[3rem] shadow-2xl"
+      >
         <ul className="flex flex-col items-center gap-8">
           {navLinks.map((link, i) => (
             <li key={link.name} ref={el => linksRef.current[i] = el} className="overflow-hidden">
@@ -367,12 +381,23 @@ const CertCard = ({ cert, index }) => {
         </h3>
       </div>
 
+      {cert.image && (
+        <div className="mb-8 mt-4 rounded-xl overflow-hidden border border-gray-200 bg-gray-50 flex items-center justify-center">
+          <img
+            src={cert.image}
+            alt={`${cert.title} Certificate`}
+            className="w-full h-auto object-cover max-h-64"
+            onError={(e) => { e.target.style.display = 'none'; }}
+          />
+        </div>
+      )}
+
       {cert.link ? (
         <a
           href={cert.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-8 flex items-center justify-center gap-2 bg-black text-white px-6 py-3.5 rounded-full font-medium hover:bg-gray-800 transition-colors"
+          className="mt-auto flex items-center justify-center gap-2 bg-black text-white px-6 py-3.5 rounded-full font-medium hover:bg-gray-800 transition-colors"
         >
           Verify Certificate <ArrowUpRight className="w-4 h-4" />
         </a>
@@ -531,6 +556,14 @@ const Footer = () => (
 );
 
 function App() {
+  useEffect(() => {
+    // Disable automatic browser scroll restoration so we always start perfectly at the top
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen p-2 md:p-6 bg-transparent">
       <CustomCursor />
