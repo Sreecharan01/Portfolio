@@ -5,6 +5,7 @@ export const portfolioData = {
         bio: "I am a CSE student enthusiastic about crafting scalable software and interactive web applications. I enjoy solving complex problems and continuously expanding my technical skill set. Welcome to my digital portfolio.",
         currentStatus: "Lovely Professional University",
         avatarUrl: "sree suit image.png",
+        resumeUrl: "Sreecharan-12324999  CV Resume.pdf",
         contact: {
             email: "sreecharan831@gmail.com",
             github: "https://github.com/Sreecharan01",

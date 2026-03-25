@@ -99,6 +99,15 @@ const TopNav = () => {
               {link.name}
             </a>
           ))}
+          {portfolioData.personalInfo.resumeUrl && (
+            <a
+              href={portfolioData.personalInfo.resumeUrl}
+              download="Resume.pdf"
+              className="bg-black text-white px-5 py-2.5 rounded-full hover:bg-gray-800 transition-colors duration-200"
+            >
+              Resume
+            </a>
+          )}
         </div>
 
         {/* Mobile Hamburger */}
@@ -126,6 +135,18 @@ const TopNav = () => {
               </a>
             </li>
           ))}
+          {portfolioData.personalInfo.resumeUrl && (
+            <li ref={el => linksRef.current[navLinks.length] = el} className="overflow-hidden mt-8">
+              <a
+                href={portfolioData.personalInfo.resumeUrl}
+                download="Resume.pdf"
+                onClick={() => setIsOpen(false)}
+                className="text-3xl md:text-5xl font-black text-black bg-white px-10 py-5 rounded-full hover:bg-gray-200 transition-colors uppercase tracking-tighter block"
+              >
+                Download Resume
+              </a>
+            </li>
+          )}
         </ul>
       </div>
     </>
